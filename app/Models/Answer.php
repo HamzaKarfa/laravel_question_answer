@@ -8,16 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
-    /**
-     * @var string
-     */
-    protected $answer;
-    /**
-     * @var Question
-     */
-    protected $question;
+
+    protected $fillable = ['id', 'answer'];
+
+    // /**
+    //  * @var int
+    //  */
+    // protected $id;
+
+    // /**
+    //  * @var string
+    //  */
+    // protected $answer;
 
 
+
+
+    public function getId():int
+    {
+        return $this->id;
+    }
+    public function setId(int $id):void
+    {
+        $this->id = $id;
+    }
 
 
     public function getAnswer():string
@@ -30,12 +44,5 @@ class Answer extends Model
     }
 
 
-    public function getQuestion():Question
-    {
-        return $this->question;
-    }
-    public function setQuestion(Question $question):void
-    {
-        $this->question = $question;
-    }
+
 }

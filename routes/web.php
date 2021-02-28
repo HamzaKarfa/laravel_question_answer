@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |s
 */
 
-Route::get('/', 'App\Http\Controllers\Controller@index');
+// Route::get('/', 'App\Http\Controllers\Controller@index');
 
-
+Route::get('/', [Controller::class, 'index']);

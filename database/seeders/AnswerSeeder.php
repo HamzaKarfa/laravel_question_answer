@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Answer;
 
-class AnswersSeeder extends Seeder
+class AnswerSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -19,7 +19,6 @@ class AnswersSeeder extends Seeder
         for ($i = 1; $i < 11; $i++) {
             $answer = new Answer;
             $answer->answer = $faker->Text;
-            $answer->question_id = $i;
             $answer->save();
         }
     }

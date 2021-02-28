@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('question')->insert([
+        DB::table('questions')->insert([
             'question' => 'testQuestion',
             "answer_id" => 1,
             "created_at" => now(),

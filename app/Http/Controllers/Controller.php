@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Answer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,22 +17,26 @@ class Controller extends BaseController
     *
     *
     */
-    public function index (){   
+    public function index (){
 
-        $countQuestion = DB::table('questions')->count();
 
-        $searchId = rand (1, $countQuestion);
-        $questions = DB::table('questions')
-                    ->where('questions.id','=', $searchId)
-                    ->join('answers', 'questions.answer_id', '=', 'answers.id')
-                    ->select('questions.*', 'answers.*')
-                    ->first();
+        $question = Question::inRandomOrder()
+            ->limit(1)
+            ->first();
+        // echo $questions->getAnswer()->getId();
+        $falseAnswer = Answer::inRandomOrder()
+            ->where('id','!=',$question->getAnswer()->getId())
+            ->limit(3)
+            ->get();
+            $falseAnswer->push($question->getAnswer());
+            $falseAnswer->shuffle();
 
-       
+        //  dd($question ,$falseAnswer[0] );
+        //  dd($question->getAnswer()->getId());
 
         return view("welcome", [
-            "question" => $questions->question,
-            "response" => $questions->answer
+            "question" => $question->getQuestion(),
+            "responses" =>  $falseAnswer
         ]);
     }
 

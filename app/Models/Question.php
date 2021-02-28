@@ -9,15 +9,38 @@ class Question extends Model
 {
     use HasFactory;
 
-    /**
-     * @var string
-     */
-    protected $question;
-    /**
-     * @var Answer
-     */
-    protected $answer;
 
+    protected $fillable = [ 'question', 'answer'];
+    protected $hidden = ['id'];
+
+    // /**
+    //  * id question
+    //  *
+    //  * @var string
+    //  */
+    // protected $id;
+
+    // /**
+    //  * String question
+    //  *
+    //  * @var string
+    //  */
+    // protected $question;
+    // /**
+    //  * Model Answer : response of this question
+    //  *
+    //  * @var Answer
+    //  */
+    // protected $answer;
+
+    public function getId():int
+    {
+        return $this->id;
+    }
+    public function setId(int $id):void
+    {
+        $this->id = $id;
+    }
 
     public function getQuestion():string
     {
@@ -27,8 +50,6 @@ class Question extends Model
     {
         $this->question = $question;
     }
-
-
     public function getAnswer():Answer
     {
         return $this->answer;
@@ -37,8 +58,10 @@ class Question extends Model
     {
         $this->answer = $answer;
     }
-    public function toto()
+
+    public function answer()
     {
-        dd("Wesh");
+        return $this->belongsTo('App\Models\Answer', 'id');
     }
+
 }
